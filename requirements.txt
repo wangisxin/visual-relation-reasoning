@@ -1,4 +1,4 @@
-# 图像关系推理系统依赖
+# 图像关系推理系统依赖 VLM增强版
 
 # 核心
 ultralytics>=8.0.0
@@ -9,5 +9,26 @@ Pillow>=10.0.0
 # 桌面UI
 PyQt6>=6.6.0
 
+# Web UI (新增)
+streamlit>=1.30.0
+
+# VLM & AI (新增)
+# torch>=2.0.0
+# transformers>=4.35.0
+# sentencepiece>=0.1.99
+# accelerate>=0.25.0
+
+# SAM分割 (新增)
+# segment-anything
+# onnxruntime-gpu
+
+# 场景图 (新增)
+# networkx>=3.0
+
 # 工具
 tqdm>=4.65.0
+requests>=2.31.0
+
+# 可选: API调用
+# openai>=1.0.0
+# anthropic>=0.18.0
