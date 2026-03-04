@@ -41,7 +41,7 @@ class ObjectDetector:
         's': {'name': 'YOLOv8s', 'params': '11.2M', 'speed': '快', 'accuracy': '较低'},
         'm': {'name': 'YOLOv8m', 'params': '25.9M', 'speed': '中等', 'accuracy': '中等'},
         'l': {'name': 'YOLOv8l', 'params': '43.7M', 'speed': '慢', 'accuracy': '较高'},
-        'x': {'name': 'YOLOv8x', 'params': '68.2M', 'speed': 'accuracy': '最高最慢', ''}
+        'x': {'name': 'YOLOv8x', 'params': '68.2M', 'speed': '最慢', 'accuracy': '最高'}
     }
     
     def __init__(self, model_size: str = 'n', 

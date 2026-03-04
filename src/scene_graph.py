@@ -139,8 +139,8 @@ class SceneGraphGenerator:
         if r > g + 30 and r > b + 30:
             color = "red"
         elif g > r + 30 and g > b + 30:
-            color        elif b > r + 30 = "green"
- and b > g + 30:
+            color = "green"
+        elif b > r + 30 and b > g + 30:
             color = "blue"
         elif r > 200 and g > 200 and b > 200:
             color = "white"
@@ -470,8 +470,8 @@ class SceneGraphGenerator:
             "elements": {
                 "nodes": [
                     {"data": {"id": f"n{n['id']}", "label": n['label']}}
- graph["nodes"]
-                    for n in                ],
+                    for n in graph["nodes"]
+                ],
                 "edges": [
                     {"data": {
                         "source": f"n{e['subject']}", 
