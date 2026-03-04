@@ -4,65 +4,43 @@
 
 ---
 
-## v1.2 (2026-03-04) - VLM/SAM/SceneGraph核心模块
+## v1.3 (2026-03-04) - Streamlit UI V2.0
 
 ### 日期
 2026-03-04
 
 ### 阶段
-阶段2: VLM融合 + 功能扩展
+阶段3: UI优化
 
-### 新增功能
+### 新增/改进功能
 
-#### VLM智能理解模块 (vlm.py)
-- **多模式支持**:
-  - API模式: OpenAI GPT-4V, 阿里Qwen-VL
-  - 本地模型: LLaVA, Qwen-VL支持
-  - 轻量模式: 基础图像分析
-- 功能:
-  - 图像描述生成
-  - 智能问答
-  - 批量描述
+#### 界面优化
+- 全新UI设计，自定义CSS样式
+- 现代化卡片式布局
+- 渐变进度条
+- 响应式设计
 
-#### SAM分割模块 (segmenter.py)
-- **多后端支持**:
-  - Meta SAM: vit_b/vit_l/vit_h
-  - Grounded-SAM: 检测+分割一体化
-  - 轻量模式: OpenCV GrabCut
-- 功能:
-  - 点/框提示分割
-  - 全自动分割 (Segment Everything)
-  - 掩码优化
+#### 功能增强
+- **标签页设计**: 分析结果 / 详细数据 / 导出
+- **高级设置**: GPU加速、批量处理
+- **预设问答**: 常见问题快速点击
+- **处理时间**: 显示FPS和处理时间
+- **详细统计**: 指标卡片 + 详细列表
+- **场景图导出**: JSON格式下载
 
-#### 场景图生成模块 (scene_graph.py)
-- **多推理模式**:
-  - 规则模式: 基于几何位置的关系推理
-  - LLM模式: 大语言模型关系推理
-  - 神经网络模式: RelTR等方法
-- 功能:
-  - 空间关系: above/below/left/right/inside/overlaps
-  - 语义关系: holding/sitting_on/using
-  - 视觉属性: 颜色/大小分析
-  - 多格式导出: JSON/Graphviz/Cytoscape
-
-#### 检测器优化 (detector.py)
-- 模型尺寸选择: n/s/m/l/x
-- 批量推理支持
-- 视频流检测
-- 性能优化: 颜色缓存/NMS
-- 过滤与统计功能
+#### 用户体验
+- 欢迎界面功能说明
+- 加载动画和进度条
+- 错误提示优化
+- 更好的移动端适配
 
 ### 文件变更
 | 文件 | 操作 | 描述 |
 |------|------|------|
-| src/vlm.py | 重写 | VLM智能理解 (10000+行) |
-| src/segmenter.py | 重写 | SAM分割模块 (11000+行) |
-| src/scene_graph.py | 重写 | 场景图生成 (15000+行) |
-| src/detector.py | 重写 | YOLOv8优化版 (13000+行) |
-| CHANGELOG.md | 新增 | 升级日志 |
+| src/app.py | 重写 | UI V2.0 (14770行) |
 
 ### Git提交
-`6e25b78` - feat: 阶段2 - VLM/SAM/SceneGraph核心模块实现
+`29c908c` - feat: 阶段3 - Streamlit UI V2.0 优化
 
 ### 状态
 ✅ 已完成
