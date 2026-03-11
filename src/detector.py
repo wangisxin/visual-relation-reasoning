@@ -4,6 +4,7 @@
 """
 import cv2
 import numpy as np
+from PIL import Image
 from typing import List, Dict, Tuple, Optional, Union
 from pathlib import Path
 import threading
