@@ -1,6 +1,10 @@
 """
-物体检测模块 - 基于 YOLOv8 (优化版)
+物体检测模块 - 基于 YOLOv8/YOLO26 (优化版)
 支持多种模型、批处理、性能优化
+
+2026-03-12: 升级支持YOLO26 (2026年1月发布)
+- YOLO26相比YOLOv8: CPU推理提速43%，mAP提升
+- Edge-First设计，专为边缘设备优化
 """
 import cv2
 import numpy as np
@@ -36,13 +40,20 @@ class ObjectDetector:
         'book', 'clock', 'vase', 'scissors', 'teddy bear', 'hair drier', 'toothbrush'
     ]
     
-    # 模型尺寸配置
+    # 模型尺寸配置 (支持YOLOv8和YOLO26)
     MODEL_CONFIGS = {
+        # YOLOv8
         'n': {'name': 'YOLOv8n', 'params': '3.2M', 'speed': '最快', 'accuracy': '最低'},
         's': {'name': 'YOLOv8s', 'params': '11.2M', 'speed': '快', 'accuracy': '较低'},
         'm': {'name': 'YOLOv8m', 'params': '25.9M', 'speed': '中等', 'accuracy': '中等'},
         'l': {'name': 'YOLOv8l', 'params': '43.7M', 'speed': '慢', 'accuracy': '较高'},
-        'x': {'name': 'YOLOv8x', 'params': '68.2M', 'speed': '最慢', 'accuracy': '最高'}
+        'x': {'name': 'YOLOv8x', 'params': '68.2M', 'speed': '最慢', 'accuracy': '最高'},
+        # YOLO26 (2026年1月发布，Edge-First设计)
+        '26n': {'name': 'YOLO26n', 'params': '5MB', 'speed': '最快(Edge)', 'accuracy': '40.1%'},
+        '26s': {'name': 'YOLO26s', 'params': '19MB', 'speed': '快(Edge)', 'accuracy': '47.8%'},
+        '26m': {'name': 'YOLO26m', 'params': '42MB', 'speed': '中等(Edge)', 'accuracy': '52.5%'},
+        '26l': {'name': 'YOLO26l', 'params': '51MB', 'speed': '慢(Edge)', 'accuracy': '54.3%'},
+        '26x': {'name': 'YOLO26x', 'params': '113MB', 'speed': '最慢(Edge)', 'accuracy': '56.8%'}
     }
     
     def __init__(self, model_size: str = 'n', 
@@ -71,12 +82,19 @@ class ObjectDetector:
         self._load_model()
     
     def _load_model(self):
-        """加载YOLOv8模型"""
+        """加载YOLOv8/YOLO26模型"""
         try:
             from ultralytics import YOLO
-            print(f"加载 {self.MODEL_CONFIGS[self.model_size]['name']} 模型...")
             
-            self.model = YOLO(f'yolov8{self.model_size}.pt')
+            # 判断是否加载YOLO26
+            if self.model_size.startswith('26'):
+                model_name = f'yolo26{self.model_size[2:]}.pt'
+                print(f"加载 {self.MODEL_CONFIGS[self.model_size]['name']} 模型 (YOLO26)...")
+            else:
+                model_name = f'yolov8{self.model_size}.pt'
+                print(f"加载 {self.MODEL_CONFIGS[self.model_size]['name']} 模型...")
+            
+            self.model = YOLO(model_name)
             self.model.to(device=self.device)
             
             # 半精度
